@@ -278,7 +278,7 @@ window.location.reload();
     };
 
     try {
-      const res = await fetch("http://localhost:3000/matiers/multiple", {
+      const res = await fetch("https://calculator-neon-kappa.vercel.app/matiers/multiple", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
