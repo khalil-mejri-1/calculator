@@ -9,9 +9,14 @@ app.use(express.json());
 
 app.use(express.json()); // 👈 this is important for JSON parsing
 
-const cors = require("cors");
-app.use(cors());
+const cors = require('cors');
 
+// أو لو تريد تحديد إعدادات CORS:
+app.use(cors({
+  origin: 'http://localhost:3000', // أو دومين الفرونت إند
+  methods: ['GET', 'POST', 'OPTIONS'], // السماح بالطرق المطلوبة
+  allowedHeaders: ['Content-Type', 'Authorization'], // السماح بالرؤوس المطلوبة
+}));
 const connectDB = async () => {
   try {
     const uri =
