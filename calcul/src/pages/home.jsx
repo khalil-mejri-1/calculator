@@ -276,9 +276,10 @@ window.location.reload();
       // لا ترسل _id لأن السيرفر يولده تلقائياً
       matieres: storedMatiers,
     };
+console.log("Sending payload:", payload);
 
     try {
-      const res = await fetch("https://calculator-neon-kappa.vercel.app/matiers/multiple", {
+      const res = await fetch("https://calculator-to9b.vercel.app/matiers/multiple", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -286,7 +287,8 @@ window.location.reload();
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+const data = await res.json();
+console.log("Response data:", data);
 
       if (res.ok) {
         setcode2(data.parentId)
