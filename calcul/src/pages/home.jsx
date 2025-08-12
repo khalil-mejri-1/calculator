@@ -279,7 +279,7 @@ window.location.reload();
 console.log("Sending payload:", payload);
 
     try {
-      const res = await fetch("https://calculator-ntte.vercel.app/matiers/multiple", {
+      const res = await fetch("https://calculator-4top.vercel.app/matiers/multiple", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
