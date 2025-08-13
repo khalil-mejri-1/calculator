@@ -279,7 +279,7 @@ window.location.reload();
 console.log("Sending payload:", payload);
 
     try {
-      const res = await fetch("https://calculator-8o11-git-main-kmejri57-gmailcoms-projects.vercel.app/matiers/multiple", {
+      const res = await fetch("http://localhost:3000/matiers/multiple", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
