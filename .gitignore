@@ -7,4 +7,4 @@ server/dist/
 
 # Environment files
 client/.env
-
+server/.env
