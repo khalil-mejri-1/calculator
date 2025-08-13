@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Matier = require('./models/matier');
+require('dotenv').config();
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -13,9 +14,8 @@ app.use(cors());
 
 const connectDB = async () => {
   try {
-    const uri =
-      "mongodb+srv://calculfac6:iPyBFRLx1KXAphrO@cluster0.h4w57kq.mongodb.net/";
-    await mongoose.connect(uri);
+   await mongoose.connect(process.env.MONGODB_URI);
+
     console.log("MongoDB connected successfully");
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -166,7 +166,12 @@ app.put("/matier/:id", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running at port ${port}`);
-});
+
+const port = process.env.PORT || 3000; // سيبها لو حابب تشغل محلي
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running at port ${port}`);
+  });
+}
+
+module.exports = app; // 👈 مهم لـ Vercel
