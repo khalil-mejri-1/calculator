@@ -1,9 +1,9 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import React, { useEffect, useState,useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { X } from "lucide-react"; // or any icon from your library
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Toast } from 'primereact/toast';
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
 
 const Home = () => {
   const [visible, setVisible] = useState(false);
@@ -12,9 +12,9 @@ const Home = () => {
   const [localMatiers, setLocalMatiers] = React.useState([]);
 
   const [isCodeValid, setIsCodeValid] = useState(false);
-const [errorMsg, setErrorMsg] = useState("");
-      const [copied, setCopied] = useState(false);
-      const [code2, setcode2] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [code2, setcode2] = useState(false);
 
   const [evaluationType, setEvaluationType] = useState("");
   const [nom, setNom] = useState("");
@@ -23,7 +23,7 @@ const [errorMsg, setErrorMsg] = useState("");
   const [coefValues, setCoefValues] = React.useState({});
   const [error, setError] = useState(null);
   const [error2, setError2] = useState(null);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const [formul, setFormul] = useState({
     coef_ds: "",
@@ -53,29 +53,26 @@ const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(true);
   const [hasSearched, setHasSearched] = useState(false); // جديد
 
+  const toast = useRef(null);
 
-
-
-
-
-
-    const toast = useRef(null);
-
-    const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    }
-
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code2).then(() => {
-      toast.current.show({ severity: "success", summary: "Copié", detail: "Le code a été copié !" });
+  const accept = () => {
+    toast.current.show({
+      severity: "info",
+      summary: "Confirmed",
+      detail: "You have accepted",
+      life: 3000,
     });
   };
 
-
-
-
-
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(code2).then(() => {
+      toast.current.show({
+        severity: "success",
+        summary: "Copié",
+        detail: "Le code a été copié !",
+      });
+    });
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -229,8 +226,7 @@ const [errorMsg, setErrorMsg] = useState("");
       return;
     }
 
-
-  const newMatier = {
+    const newMatier = {
       id: Date.now().toString(),
       nom: nom.trim(),
       coef: Number(coef),
@@ -238,16 +234,14 @@ const [errorMsg, setErrorMsg] = useState("");
     };
 
     // حفظ في localStorage
-setMatiers((prevMatiers) => {
-  const updatedList = [...prevMatiers, newMatier];
-  localStorage.setItem("matiers", JSON.stringify(updatedList));
-  return updatedList;
-});
+    setMatiers((prevMatiers) => {
+      const updatedList = [...prevMatiers, newMatier];
+      localStorage.setItem("matiers", JSON.stringify(updatedList));
+      return updatedList;
+    });
 
-// إعادة تحميل الصفحة
-window.location.reload();
-
-
+    // إعادة تحميل الصفحة
+    window.location.reload();
 
     setNom("");
     setCoef("");
@@ -276,22 +270,25 @@ window.location.reload();
       // لا ترسل _id لأن السيرفر يولده تلقائياً
       matieres: storedMatiers,
     };
-console.log("Sending payload:", payload);
+    console.log("Sending payload:", payload);
 
     try {
-      const res = await fetch("http://localhost:3000/matiers/multiple", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "http://localhost:3000/matiers/multiple",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
-const data = await res.json();
-console.log("Response data:", data);
+      const data = await res.json();
+      console.log("Response data:", data);
 
       if (res.ok) {
-        setcode2(data.parentId)
+        setcode2(data.parentId);
         console.log(data);
 
         // لو تريد تمسح localStorage بعد الإرسال
@@ -305,15 +302,12 @@ console.log("Response data:", data);
     }
   };
 
-const handleDelete = (id) => {
-
-  const updatedMatiers = matiers.filter((m) => m.id !== id);
-  setMatiers(updatedMatiers);
-  localStorage.setItem("matiers", JSON.stringify(updatedMatiers));
-  window.location.reload();
-
-};
-
+  const handleDelete = (id) => {
+    const updatedMatiers = matiers.filter((m) => m.id !== id);
+    setMatiers(updatedMatiers);
+    localStorage.setItem("matiers", JSON.stringify(updatedMatiers));
+    window.location.reload();
+  };
 
   const footerContent = (
     <div>
@@ -332,57 +326,62 @@ const handleDelete = (id) => {
     </div>
   );
 
-const handleUpdateMatier = () => {
-  if (!currentMatier) return;
+  const handleUpdateMatier = () => {
+    if (!currentMatier) return;
 
-  // تحقق من حقل nom و coef
-  if (!formData.nom.trim()) {
-    setErrorMsg("Le champ 'Nom' ne peut pas être vide.");
-    return;
-  }
+    // تحقق من حقل nom و coef
+    if (!formData.nom.trim()) {
+      setErrorMsg("Le champ 'Nom' ne peut pas être vide.");
+      return;
+    }
 
-  if (formData.coef === "" || formData.coef === null || isNaN(Number(formData.coef))) {
-    setErrorMsg("Le champ 'Coef' ne peut pas être vide.");
-    return;
-  }
+    if (
+      formData.coef === "" ||
+      formData.coef === null ||
+      isNaN(Number(formData.coef))
+    ) {
+      setErrorMsg("Le champ 'Coef' ne peut pas être vide.");
+      return;
+    }
 
-  const totalCoef = Object.values(formData.formul).reduce((acc, val) => {
-    const numVal = Number(val);
-    return acc + (isNaN(numVal) || val === "" ? 0 : numVal);
-  }, 0);
+    const totalCoef = Object.values(formData.formul).reduce((acc, val) => {
+      const numVal = Number(val);
+      return acc + (isNaN(numVal) || val === "" ? 0 : numVal);
+    }, 0);
 
-  if (totalCoef < 1) {
-    setErrorMsg(
-      `La somme des coefficients ne doit pas être inférieure à 100%. (Actuellement: ${totalCoef * 100}%)`
-    );
-    return;
-  }
+    if (totalCoef < 1) {
+      setErrorMsg(
+        `La somme des coefficients ne doit pas être inférieure à 100%. (Actuellement: ${
+          totalCoef * 100
+        }%)`
+      );
+      return;
+    }
 
-  if (totalCoef > 1) {
-    setErrorMsg(
-      `La somme des coefficients ne doit pas dépasser 100%. (Actuellement: ${totalCoef * 100}%)`
-    );
-    return;
-  }
+    if (totalCoef > 1) {
+      setErrorMsg(
+        `La somme des coefficients ne doit pas dépasser 100%. (Actuellement: ${
+          totalCoef * 100
+        }%)`
+      );
+      return;
+    }
 
-  // إذا المجموع تمام
-  setErrorMsg("");
+    // إذا المجموع تمام
+    setErrorMsg("");
 
-  setMatiers((prev) => {
-    const updated = prev.map((m) =>
-      m.id === currentMatier.id ? { ...m, ...formData } : m
-    );
-    localStorage.setItem("matiers", JSON.stringify(updated));
-    window.location.reload();
+    setMatiers((prev) => {
+      const updated = prev.map((m) =>
+        m.id === currentMatier.id ? { ...m, ...formData } : m
+      );
+      localStorage.setItem("matiers", JSON.stringify(updated));
+      window.location.reload();
 
-    return updated;
-  });
+      return updated;
+    });
 
-  setModifier(false);
-};
-
-
-
+    setModifier(false);
+  };
 
   function capitalizeFirstLetter(str) {
     if (!str) return "";
@@ -465,7 +464,7 @@ const handleUpdateMatier = () => {
 
   const handleRecherche = async () => {
     if (!code.trim()) {
-    setError2("Veuillez saisir le code  ")
+      setError2("Veuillez saisir le code  ");
       return;
     }
 
@@ -506,44 +505,38 @@ const handleUpdateMatier = () => {
     // أضف أي مفتاح آخر تحتاجه هنا
   };
 
-  
-
   const handleDeleteAll_bd = async () => {
-    if (!window.confirm('Are you sure you want to delete all matiers?')) return;
+    if (!window.confirm("Are you sure you want to delete all matiers?")) return;
 
     setLoading(true);
-    setMessage('');
+    setMessage("");
 
     try {
-      const response = await fetch('http://localhost:3000/matier', {
-        method: 'DELETE',
+      const response = await fetch("http://localhost:3000/matier", {
+        method: "DELETE",
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete all matiers');
+        throw new Error("Failed to delete all matiers");
       }
 
       const data = await response.json();
-      setMessage(data.message || 'All matiers deleted successfully');
+      setMessage(data.message || "All matiers deleted successfully");
     } catch (error) {
-      setMessage(error.message || 'Error deleting matiers');
+      setMessage(error.message || "Error deleting matiers");
     } finally {
       setLoading(false);
     }
   };
 
-
-
-
-
   return (
     <div>
-        <div className="buttno_delete_all_bd">
-      <button onClick={handleDeleteAll_bd} disabled={loading}>
-        {loading ? 'Deleting...' : 'Delete All Matiers'}
-      </button>
-      {message && <p>{message}</p>}
-    </div>
+      <div className="buttno_delete_all_bd">
+        <button onClick={handleDeleteAll_bd} disabled={loading}>
+          {loading ? "Deleting..." : "Delete All Matiers"}
+        </button>
+        {message && <p>{message}</p>}
+      </div>
       <div className="bloc_titre">
         <div>
           <i
@@ -617,15 +610,13 @@ const handleUpdateMatier = () => {
             ></i>
             Tout Effacer
           </button>
-<button
-  className="button_partager"
-  onClick={() => {
-    sendAllMatiers();
-    setCopied(true);
-  }}
->
-
-
+          <button
+            className="button_partager"
+            onClick={() => {
+              sendAllMatiers();
+              setCopied(true);
+            }}
+          >
             <i
               className="pi pi-share-alt"
               style={{ fontSize: "0.8rem", marginRight: "10px" }}
@@ -685,20 +676,15 @@ const handleUpdateMatier = () => {
           min={0}
           max={99999}
           step={1}
-          
           value={code}
           onChange={(e) => {
             setCode(e.target.value);
             if (!e.target.value) {
-           
               setHasSearched(false); // مسح الرسالة إذا الحقل فاضي
             }
- if (e.target.value) {
-           
-             setError2(null); // Clear the error when input is empty
+            if (e.target.value) {
+              setError2(null); // Clear the error when input is empty
             }
-
-
           }}
         />
 
@@ -732,12 +718,13 @@ const handleUpdateMatier = () => {
           Recherche
         </button>
       </div>
-<p className="erreur_2">{error2}</p>
+      <p className="erreur_2">{error2}</p>
       {hasSearched && !isCodeValid && (
         <>
-          <p className="erreur_2">   Le code est incorrect ou aucun élément à afficher
-
-    .</p>
+          <p className="erreur_2">
+            {" "}
+            Le code est incorrect ou aucun élément à afficher .
+          </p>
         </>
       )}
 
@@ -789,98 +776,97 @@ const handleUpdateMatier = () => {
             }}
             onHide={() => window.location.reload()}
           >
-       <div style={{ padding: "0px" }}>
-    {/* Moyenne générale */}
-    <div className="bloc_res_dialog">
-      <p className="mg_dialog">
-        <i
-          className="pi pi-calculator"
-          style={{
-            fontSize: "1.2rem",
-            color: "#caa81c",
-            position: "relative",
-            top: "2px",
-          }}
-        ></i>{" "}
-        Moyenne Générale
-      </p>
-<p
-  className="moy_dialog"
-  style={{
-    fontSize: "28px",
-    fontWeight: "bold",
-    color: (() => {
-      let totalGeneral = 0;
-      let totalCoefGeneral = 0;
+            <div style={{ padding: "0px" }}>
+              {/* Moyenne générale */}
+              <div className="bloc_res_dialog">
+                <p className="mg_dialog">
+                  <i
+                    className="pi pi-calculator"
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "#caa81c",
+                      position: "relative",
+                      top: "2px",
+                    }}
+                  ></i>{" "}
+                  Moyenne Générale
+                </p>
+                <p
+                  className="moy_dialog"
+                  style={{
+                    fontSize: "28px",
+                    fontWeight: "bold",
+                    color: (() => {
+                      let totalGeneral = 0;
+                      let totalCoefGeneral = 0;
 
-      matiers.forEach((m, i) => {
-        const values = coefValues[i] || {};
-        let total = 0;
-        let totalCoef = 0;
+                      matiers.forEach((m, i) => {
+                        const values = coefValues[i] || {};
+                        let total = 0;
+                        let totalCoef = 0;
 
-        Object.entries(m.formul).forEach(([key, coef]) => {
-          if (coef > 0) {
-            const note =
-              values[key] === "" || values[key] === undefined
-                ? 0
-                : Number(values[key]);
-            total += note * coef;
-            totalCoef += coef;
-          }
-        });
+                        Object.entries(m.formul).forEach(([key, coef]) => {
+                          if (coef > 0) {
+                            const note =
+                              values[key] === "" || values[key] === undefined
+                                ? 0
+                                : Number(values[key]);
+                            total += note * coef;
+                            totalCoef += coef;
+                          }
+                        });
 
-        if (totalCoef > 0) {
-          totalGeneral += (total / totalCoef) * m.coef;
-          totalCoefGeneral += m.coef;
-        }
-      });
+                        if (totalCoef > 0) {
+                          totalGeneral += (total / totalCoef) * m.coef;
+                          totalCoefGeneral += m.coef;
+                        }
+                      });
 
-      const moyGen =
-        totalCoefGeneral === 0
-          ? NaN
-          : totalGeneral / totalCoefGeneral;
+                      const moyGen =
+                        totalCoefGeneral === 0
+                          ? NaN
+                          : totalGeneral / totalCoefGeneral;
 
-      if (isNaN(moyGen)) return "white";
-      if (moyGen < 8) return "#e36e66";
-      if (moyGen <= 11.99) return "#5b9cf1";
-      return "#48d77d";
-    })(),
-  }}
->
-  {(() => {
-    let totalGeneral = 0;
-    let totalCoefGeneral = 0;
+                      if (isNaN(moyGen)) return "white";
+                      if (moyGen < 8) return "#e36e66";
+                      if (moyGen <= 11.99) return "#5b9cf1";
+                      return "#48d77d";
+                    })(),
+                  }}
+                >
+                  {(() => {
+                    let totalGeneral = 0;
+                    let totalCoefGeneral = 0;
 
-    matiers.forEach((m, i) => {
-      const values = coefValues[i] || {};
-      let total = 0;
-      let totalCoef = 0;
+                    matiers.forEach((m, i) => {
+                      const values = coefValues[i] || {};
+                      let total = 0;
+                      let totalCoef = 0;
 
-      Object.entries(m.formul).forEach(([key, coef]) => {
-        if (coef > 0) {
-          const note = values[key] ? Number(values[key]) : 0;
-          total += note * coef;
-          totalCoef += coef;
-        }
-      });
+                      Object.entries(m.formul).forEach(([key, coef]) => {
+                        if (coef > 0) {
+                          const note = values[key] ? Number(values[key]) : 0;
+                          total += note * coef;
+                          totalCoef += coef;
+                        }
+                      });
 
-      if (totalCoef > 0) {
-        totalGeneral += (total / totalCoef) * m.coef;
-        totalCoefGeneral += m.coef;
-      }
-    });
+                      if (totalCoef > 0) {
+                        totalGeneral += (total / totalCoef) * m.coef;
+                        totalCoefGeneral += m.coef;
+                      }
+                    });
 
-    const moyGen =
-      totalCoefGeneral === 0 ? NaN : totalGeneral / totalCoefGeneral;
+                    const moyGen =
+                      totalCoefGeneral === 0
+                        ? NaN
+                        : totalGeneral / totalCoefGeneral;
 
-    if (isNaN(moyGen)) return "00/20";
-    return moyGen.toFixed(2) + "/20";
-  })()}
-</p>
-
-    </div>
-
-
+                    if (isNaN(moyGen)) return "00/20";
+                    return moyGen.toFixed(2) + "/20";
+                  })()}
+                </p>
+              </div>
 
               {hasSearched && matiers.length > 0 && (
                 <div className="bloc_matiers">
@@ -904,117 +890,116 @@ const handleUpdateMatier = () => {
                       </div>
 
                       {/* هنا نعرض input لكل مفتاح قيمته > 0 */}
-             <div className="bloc_input">
-              {Object.entries(m.formul)
-                .filter(([key, value]) => value > 0)
-                .map(([key, value]) => (
-                  <div key={key} style={{ marginBottom: "8px" }}>
-                    <label
-                      htmlFor={`${key}-${i}`}
-                      style={{
-                        display: "block",
-                        marginBottom: "4px",
-                      }}
-                      className="label_dialog_bd"
-                    >
-                      {labelMap[key] || key} ({value * 100} %)
-                    </label>
-                    <input
-                      onWheel={(e) => e.target.blur()}
-                      id={`${key}-${i}`}
-                      type="number"
-                      placeholder="Ex"
-                      value={
-                        coefValues[i]?.[key] === undefined ||
-                        coefValues[i]?.[key] === ""
-                          ? ""
-                          : coefValues[i][key]
-                      }
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        if (val === "" || isNaN(val)) {
-                          setCoefValues((prev) => ({
-                            ...prev,
-                            [i]: {
-                              ...prev[i],
-                              [key]: "",
-                            },
-                          }));
-                          return;
-                        }
-                        val = Number(val);
-                        if (val < 0) val = 0;
-                        if (val > 20) val = 20;
-                        setCoefValues((prev) => ({
-                          ...prev,
-                          [i]: {
-                            ...prev[i],
-                            [key]: val,
-                          },
-                        }));
-                      }}
-                    />
-                  </div>
-                ))}
-            </div>
+                      <div className="bloc_input">
+                        {Object.entries(m.formul)
+                          .filter(([key, value]) => value > 0)
+                          .map(([key, value]) => (
+                            <div key={key} style={{ marginBottom: "8px" }}>
+                              <label
+                                htmlFor={`${key}-${i}`}
+                                style={{
+                                  display: "block",
+                                  marginBottom: "4px",
+                                }}
+                                className="label_dialog_bd"
+                              >
+                                {labelMap[key] || key} ({value * 100} %)
+                              </label>
+                              <input
+                                onWheel={(e) => e.target.blur()}
+                                id={`${key}-${i}`}
+                                type="number"
+                                placeholder="Ex"
+                                value={
+                                  coefValues[i]?.[key] === undefined ||
+                                  coefValues[i]?.[key] === ""
+                                    ? ""
+                                    : coefValues[i][key]
+                                }
+                                onChange={(e) => {
+                                  let val = e.target.value;
+                                  if (val === "" || isNaN(val)) {
+                                    setCoefValues((prev) => ({
+                                      ...prev,
+                                      [i]: {
+                                        ...prev[i],
+                                        [key]: "",
+                                      },
+                                    }));
+                                    return;
+                                  }
+                                  val = Number(val);
+                                  if (val < 0) val = 0;
+                                  if (val > 20) val = 20;
+                                  setCoefValues((prev) => ({
+                                    ...prev,
+                                    [i]: {
+                                      ...prev[i],
+                                      [key]: val,
+                                    },
+                                  }));
+                                }}
+                              />
+                            </div>
+                          ))}
+                      </div>
 
-            {/* Moyenne matière */}
-            {(() => {
-              const values = coefValues[i] || {};
-              let total = 0;
-              let totalCoef = 0;
+                      {/* Moyenne matière */}
+                      {(() => {
+                        const values = coefValues[i] || {};
+                        let total = 0;
+                        let totalCoef = 0;
 
-              Object.entries(m.formul).forEach(([key, coef]) => {
-                if (coef > 0) {
-                  const note =
-                    values[key] === "" || values[key] === undefined
-                      ? 0
-                      : Number(values[key]);
-                  total += note * coef;
-                  totalCoef += coef;
-                }
-              });
+                        Object.entries(m.formul).forEach(([key, coef]) => {
+                          if (coef > 0) {
+                            const note =
+                              values[key] === "" || values[key] === undefined
+                                ? 0
+                                : Number(values[key]);
+                            total += note * coef;
+                            totalCoef += coef;
+                          }
+                        });
 
-              const num = totalCoef === 0 ? NaN : total / totalCoef;
-              const color = isNaN(num)
-                ? "#e36e66"
-                : num < 8
-                ? "#e36e66"
-                : num <= 11.99
-                ? "#5b9cf1"
-                : "#48d77d";
+                        const num = totalCoef === 0 ? NaN : total / totalCoef;
+                        const color = isNaN(num)
+                          ? "#e36e66"
+                          : num < 8
+                          ? "#e36e66"
+                          : num <= 11.99
+                          ? "#5b9cf1"
+                          : "#48d77d";
 
-              return (
-                <div className="bloc_moyenne_mat">
-                  <p className="moy_mat">
-                    <i
-                      className="pi pi-calculator"
-                      style={{
-                        fontSize: "1.0rem",
-                        color: "#caa81c",
-                        position: "relative",
-                        top: "2px",
-                        marginRight: "7px",
-                      }}
-                    ></i>{" "}
-                    Moyenne:
-                  </p>
-                  <p
-                    className="res_mou_mat"
-                    style={{
-                      color,
-                      marginLeft: "auto",
-                      float: "right",
-                      fontSize: "25px",
-                      fontWeight: "700",
-                    }}
-                  >
-                    {isNaN(num) ? "00/20" : num.toFixed(2) + "/20"}
-                  </p>
-                </div>
-              );
-            })()}
-
+                        return (
+                          <div className="bloc_moyenne_mat">
+                            <p className="moy_mat">
+                              <i
+                                className="pi pi-calculator"
+                                style={{
+                                  fontSize: "1.0rem",
+                                  color: "#caa81c",
+                                  position: "relative",
+                                  top: "2px",
+                                  marginRight: "7px",
+                                }}
+                              ></i>{" "}
+                              Moyenne:
+                            </p>
+                            <p
+                              className="res_mou_mat"
+                              style={{
+                                color,
+                                marginLeft: "auto",
+                                float: "right",
+                                fontSize: "25px",
+                                fontWeight: "700",
+                              }}
+                            >
+                              {isNaN(num) ? "00/20" : num.toFixed(2) + "/20"}
+                            </p>
+                          </div>
+                        );
+                      })()}
 
                       <p className="type_mat">
                         Type :{" "}
@@ -1035,9 +1020,6 @@ const handleUpdateMatier = () => {
             </div>
           </Dialog>
 
-
-          
-
           {localMatiers.length === 0 ? (
             <div className="bloc_vide_mat">
               <i className="pi pi-plus" style={{ fontSize: "2rem" }}></i>
@@ -1049,7 +1031,6 @@ const handleUpdateMatier = () => {
           ) : (
             //matier de localstorega
             <div>
-              
               <div className="bloc_matiers">
                 {localMatiers.map((matier) => {
                   const formul = matier.formul || {};
@@ -1060,37 +1041,6 @@ const handleUpdateMatier = () => {
 
                   return (
                     <div key={matier._id} className="card_matier">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                       <div className="button_remove_id">
                         <div
                           style={{
@@ -1104,7 +1054,6 @@ const handleUpdateMatier = () => {
                           <i
                             className="pi pi-trash button_rem"
                             style={{ fontSize: "1rem" }}
-                          
                             onClick={() => handleDelete(matier.id)}
                           ></i>
                           <i
@@ -1151,28 +1100,27 @@ const handleUpdateMatier = () => {
                               {matier.formul[key] * 100 + " %"})
                             </label>
                             <br />
-                           <input
-  type="number"
-  placeholder={`Note ${inputLabels[key] || key}`}
-  min={0}
-  max={20}
-  step={0.01}
-  value={notes[matier._id]?.[key] ?? ""}
-  onWheel={(e) => e.target.blur()} // لمنع تغيير القيمة بالماوس
-  onChange={(e) => {
-    const val = e.target.value;
-    if (val === "") {
-      handleNoteChange(matier._id, key, "");
-      return;
-    }
-    const numVal = Number(val);
-    if (numVal >= 0 && numVal <= 20) {
-      handleNoteChange(matier._id, key, numVal);
-    }
-    // لو خارج النطاق لا يتم التحديث (تجاهل)
-  }}
-/>
-
+                            <input
+                              type="number"
+                              placeholder={`Note ${inputLabels[key] || key}`}
+                              min={0}
+                              max={20}
+                              step={0.01}
+                              value={notes[matier._id]?.[key] ?? ""}
+                              onWheel={(e) => e.target.blur()} // لمنع تغيير القيمة بالماوس
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                if (val === "") {
+                                  handleNoteChange(matier._id, key, "");
+                                  return;
+                                }
+                                const numVal = Number(val);
+                                if (numVal >= 0 && numVal <= 20) {
+                                  handleNoteChange(matier._id, key, numVal);
+                                }
+                                // لو خارج النطاق لا يتم التحديث (تجاهل)
+                              }}
+                            />
                           </div>
                         ))}
                       </div>
@@ -1244,7 +1192,6 @@ const handleUpdateMatier = () => {
           ) : (
             //matier de localstorega
             <div>
-           
               <div className="bloc_matiers">
                 {localMatiers.map((matier, i) => {
                   const formul = matier.formul || {};
@@ -1267,7 +1214,6 @@ const handleUpdateMatier = () => {
                           <i
                             className="pi pi-trash button_rem"
                             style={{ fontSize: "1rem" }}
-                        
                             onClick={() => handleDelete(matier.id)}
                           ></i>
                           <i
@@ -1314,32 +1260,31 @@ const handleUpdateMatier = () => {
                               {matier.formul[key] * 100 + " %"})
                             </label>
                             <br />
-                          <input
-  type="number"
-  placeholder="Ex :10"
-  min={0}
-  max={20}
-  step={0.01}
-  value={notes[matier.id]?.[key] ?? ""}
-  onChange={(e) => {
-    let val = e.target.value;
-    // Convert to number for validation
-    let num = Number(val);
+                            <input
+                              type="number"
+                              placeholder="Ex :10"
+                              min={0}
+                              max={20}
+                              step={0.01}
+                              value={notes[matier.id]?.[key] ?? ""}
+                              onChange={(e) => {
+                                let val = e.target.value;
+                                // Convert to number for validation
+                                let num = Number(val);
 
-    // If empty, allow (so user can delete)
-    if (val === "") {
-      handleNoteChange(matier.id, key, "");
-      return;
-    }
+                                // If empty, allow (so user can delete)
+                                if (val === "") {
+                                  handleNoteChange(matier.id, key, "");
+                                  return;
+                                }
 
-    // If num is a valid number and in range, update
-    if (!isNaN(num) && num >= 0 && num <= 20) {
-      handleNoteChange(matier.id, key, val);
-    }
-  }}
-  onWheel={(e) => e.target.blur()}
-/>
-
+                                // If num is a valid number and in range, update
+                                if (!isNaN(num) && num >= 0 && num <= 20) {
+                                  handleNoteChange(matier.id, key, val);
+                                }
+                              }}
+                              onWheel={(e) => e.target.blur()}
+                            />
                           </div>
                         ))}
                       </div>
@@ -1736,95 +1681,89 @@ const handleUpdateMatier = () => {
           />
 
           {/* حقول formul مع إخفاء القيم التي تساوي 0 */}
-      {Object.keys(formData.formul).map((key) =>
-  formData.formul[key] !== 0 ? (
-    <div key={key}>
-      <label>{key}</label>
-      <input
-        onWheel={(e) => e.target.blur()}
-        type="number"
-        min={0}
-        max={10}
-        value={formData.formul[key]}
-        onChange={(e) => {
-          let val = e.target.value;
+          {Object.keys(formData.formul).map((key) =>
+            formData.formul[key] !== 0 ? (
+              <div key={key}>
+                <label>{key}</label>
+                <input
+                  onWheel={(e) => e.target.blur()}
+                  type="number"
+                  min={0}
+                  max={10}
+                  value={formData.formul[key]}
+                  onChange={(e) => {
+                    let val = e.target.value;
 
-          // السماح بحقل فارغ أثناء التحرير
-          if (val === "") {
-            setFormData((prev) => ({
-              ...prev,
-              formul: { ...prev.formul, [key]: val },
-            }));
-            return;
-          }
+                    // السماح بحقل فارغ أثناء التحرير
+                    if (val === "") {
+                      setFormData((prev) => ({
+                        ...prev,
+                        formul: { ...prev.formul, [key]: val },
+                      }));
+                      return;
+                    }
 
-          // تحقق إذا القيمة هي رقم صالح (أو تبدأ بـ 0.)
-          const regex = /^(\d+)?\.?\d*$/; // يسمح بكتابة أرقام وعشرية جزئية مثل "0.", "1.2"
-          if (!regex.test(val)) {
-            // تجاهل القيم الغير صالحة مثل الحروف أو رموز غير رقمية
-            return;
-          }
+                    // تحقق إذا القيمة هي رقم صالح (أو تبدأ بـ 0.)
+                    const regex = /^(\d+)?\.?\d*$/; // يسمح بكتابة أرقام وعشرية جزئية مثل "0.", "1.2"
+                    if (!regex.test(val)) {
+                      // تجاهل القيم الغير صالحة مثل الحروف أو رموز غير رقمية
+                      return;
+                    }
 
-          // تحويل إلى رقم فقط إذا القيمة صالحة بالكامل
-          const numVal = Number(val);
+                    // تحويل إلى رقم فقط إذا القيمة صالحة بالكامل
+                    const numVal = Number(val);
 
-          // حد أدنى وأقصى فقط عند القيمة رقم
-          if (!isNaN(numVal)) {
-            if (numVal < 0.1) {
-              // لا تغير القيمة مباشرة حتى لا تقطع كتابة المستخدم
-              // فقط قم بضبطها إذا تجاوزت الحد عند blur أو زر حفظ
-            }
-            if (numVal > 10) {
-              return; // أو قم بالتعديل هنا
-            }
-          }
+                    // حد أدنى وأقصى فقط عند القيمة رقم
+                    if (!isNaN(numVal)) {
+                      if (numVal < 0.1) {
+                        // لا تغير القيمة مباشرة حتى لا تقطع كتابة المستخدم
+                        // فقط قم بضبطها إذا تجاوزت الحد عند blur أو زر حفظ
+                      }
+                      if (numVal > 10) {
+                        return; // أو قم بالتعديل هنا
+                      }
+                    }
 
-          setFormData((prev) => ({
-            ...prev,
-            formul: { ...prev.formul, [key]: val },
-          }));
-        }}
-   onBlur={(e) => {
-  let val = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      formul: { ...prev.formul, [key]: val },
+                    }));
+                  }}
+                  onBlur={(e) => {
+                    let val = e.target.value;
 
-  if (val === "") {
-    // لا تغيّر شيء، خليه فارغ لحين الحفظ
-    setFormData((prev) => ({
-      ...prev,
-      formul: { ...prev.formul, [key]: "" },
-    }));
-    return;
-  }
+                    if (val === "") {
+                      // لا تغيّر شيء، خليه فارغ لحين الحفظ
+                      setFormData((prev) => ({
+                        ...prev,
+                        formul: { ...prev.formul, [key]: "" },
+                      }));
+                      return;
+                    }
 
-  let numVal = Number(val);
+                    let numVal = Number(val);
 
-  if (isNaN(numVal)) {
-    // إذا القيمة غير صالحة، عدلها أو تجاهل
-    return;
-  }
+                    if (isNaN(numVal)) {
+                      // إذا القيمة غير صالحة، عدلها أو تجاهل
+                      return;
+                    }
 
-  if (numVal < 0.1) {
-    numVal = 0.1;
-  } else if (numVal > 10) {
-    numVal = 10;
-  }
+                    if (numVal < 0.1) {
+                      numVal = 0.1;
+                    } else if (numVal > 10) {
+                      numVal = 10;
+                    }
 
-  setFormData((prev) => ({
-    ...prev,
-    formul: { ...prev.formul, [key]: numVal },
-  }));
-}}
-
-      />
-    </div>
-  ) : null
-)}
-{errorMsg && (
-  <div className="erreur">
-    {errorMsg}
-  </div>
-)}
-
+                    setFormData((prev) => ({
+                      ...prev,
+                      formul: { ...prev.formul, [key]: numVal },
+                    }));
+                  }}
+                />
+              </div>
+            ) : null
+          )}
+          {errorMsg && <div className="erreur">{errorMsg}</div>}
 
           <button className="button_update" onClick={handleUpdateMatier}>
             {" "}
@@ -1833,15 +1772,22 @@ const handleUpdateMatier = () => {
         </div>
       </Dialog>
 
-       <Toast ref={toast} />
+      <Toast ref={toast} />
 
       <ConfirmDialog
         group="declarative"
         visible={copied}
         onHide={() => setCopied(false)}
         message={
-          <div style={{ fontSize: "1.1rem", color: "#2c3e50", fontWeight: "500", padding: "15px 10px" }}>
-       Le code du document est{" "}
+          <div
+            style={{
+              fontSize: "1.1rem",
+              color: "#2c3e50",
+              fontWeight: "500",
+              padding: "15px 10px",
+            }}
+          >
+            Le code du document est{" "}
             <span
               style={{
                 fontFamily: "Courier New, monospace",
@@ -1866,29 +1812,25 @@ const handleUpdateMatier = () => {
         icon="pi pi-copy"
         accept={accept}
         footer={
-       <button
-  style={{
-    backgroundColor: "#007acc",
-    color: "white",
-    border: "none",
-    padding: "8px 15px",
-    borderRadius: "4px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  }}
-  onClick={() => {
-    copyToClipboard();
-    setCopied(false);
-  }}
->
-  Copier le code
-</button>
-
+          <button
+            style={{
+              backgroundColor: "#007acc",
+              color: "white",
+              border: "none",
+              padding: "8px 15px",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+            onClick={() => {
+              copyToClipboard();
+              setCopied(false);
+            }}
+          >
+            Copier le code
+          </button>
         }
       />
-      
-
-   
     </div>
   );
 };
