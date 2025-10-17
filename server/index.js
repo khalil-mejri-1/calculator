@@ -32,7 +32,7 @@ connectDB();
 // --- Routes ---
 
 app.get("/", (req, res) => {
-  res.send("Hello from Express!");
+  res.send("Hello from Express 10/17/2025!");
 });
 
 // POST route to add multiple Matiers
@@ -237,11 +237,11 @@ app.delete("/matier", async (req, res) => {
 
 // Server Listening Logic
 const port = process.env.PORT || 3000;
-if (process.env.NODE_ENV !== "production") {
-  app.listen(port, () => {
-    console.log(`Server running at port ${port}`);
-  });
-}
+app.listen(port, () => {
+  console.log(`Server running at port ${port}`);
+});
+
+
 
 // Export for Vercel
 module.exports = app;
