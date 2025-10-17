@@ -8,18 +8,121 @@
 }
 
 body {
+  /* تدرج الخلفية */
+  --bg-gradient-start: #f4f7fe;     /* أبيض ناصع مع لمسة زرقاء خفيفة جداً */
+  --bg-gradient-mid:   #f4f7fe;     /* رمادي مزرق فاتح جداً */
+  --bg-gradient-end:   #f4f7fe;     /* رمادي مزرق فاتح (أفضل للتدرج) */
+
+  /* خلفيات البطاقات */
+  --card-bg:         #FFFFFF;       /* أبيض نقي (لأقصى وضوح وتمييز للبطاقات) */
+  --card-hover-bg:   #F0F4FA;       /* رمادي فاتح مزرق عند التمرير */
+--card-border:black solid 0px;
+  /* ألوان النص */
+  --text-primary:    #404a70;       /* رمادي داكن (قريب من الأسود) لتباين ممتاز */
+  --text-secondary:  #4B5563;       /* رمادي متوسط للنصوص الثانوية */
+
+  /* شريط التنقل */
+  --navbar-bg:       #ffffff;       /* أبيض نقي */
+  --navbar-border:   #f4f7fe; 
+  --card-shadow:0  10px 25px rgba(0, 0, 0, 0.219);      /* إطار أزرق رمادي فاتح */
+
+  /* عناصر الإدخال */
+  --input-bg:           #ffffff;    /* خلفية الإدخال مطابقة لبداية الخلفية */
+  --input-border:       #d4d4d4;    /* رمادي متوسط هادئ للمحيط */
+  --input-text:         #1F2937;
+  --input-placeholder:  #A6B0BC;    /* رمادي فاتح مريح */
+
+
+  --bg-btn-ajout:#ffffff;
+    --bg-btn-partage:#ffffff;
+    --bg-btn-supprimer:#ffffff;
+    --bg-btn-tout:#ffffff;
+
+
+
+  --color-btn-white:black;
+ --border-btn-white:rgba(0, 0, 0, 0.281) solid 1px;
+--bg-btn:rgba(0, 0, 0, 0.048);
+ --border-btn-white-hover:rgb(0, 0, 0) solid 1px;
+
+  --resulta_bg:#f4f7fe;
+    --resulta-shadow:0  10px 25px rgba(0, 0, 0, 0.219);      /* إطار أزرق رمادي فاتح */
+--border_resulta:rgb(211, 208, 208) solid 1px;
+
+
+
+
+--bg-card-Coefficients: linear-gradient(to right, #E0F2F1, #B2DFDB);
+--bg-card-Moyenne:linear-gradient(to right, #E3F2FD, #BBDEFB);
+--bg-card-Nombre:linear-gradient(to right, #FCE4EC, #F8BBD0);
+
+
+--bg-button-generer-code: linear-gradient(to right, #42A5F5, #7E57C2);;
+--bg-dialog-white:rgb(255, 255, 255);
+--titre-dialog-white:#212121;
+--attantion-dialog-white:#696969;
+
+--color-btn-generer:white;
+--button_update_color:black;
+--bg-select-dialog:#ffffff;
+--color-select-dialog:#696969;
+  /* خصائص عامة للصفحة */
   margin: 0;
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
-    #11172c,
-    #3a1f60,
-    #561c85,
-    #2b1c3f,
-    #101529
+    var(--bg-gradient-start),
+    var(--bg-gradient-mid),
+    var(--bg-gradient-end)
   );
+  transition: background-color 0.3s ease;
+  --color-x:rgb(3, 3, 3);
+  --bg-color-bloc-mat:#f4f7fe;
+  --titre_code_doc:black;
 }
 
+
+
+body.dark {
+    --titre_code_doc:rgb(231, 231, 231);
+
+  --bg-gradient-start: #1E201E;
+  --bg-gradient-mid: #000000;
+  --bg-gradient-end: #1E201E;
+    --bg-color-bloc-mat:#303030;
+
+  --card-bg: #161616;
+  --card-hover-bg: #2c3f5754;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8; /* slate-400 */
+  --navbar-bg: rgba(30, 41, 59, 0.5); /* bg-slate-800/50 */
+  --navbar-border: rgba(51, 65, 85, 0.5); /* border-b border-slate-700/50 */
+  --input-bg: rgba(30, 41, 59, 0.5); /* bg-slate-800/50 */
+  --input-border: #334155; /* border-slate-700 */
+  --input-text: #ffffff;
+  --input-placeholder: #94a3b8; /* slate-400 */
+
+  
+ --color-x:rgb(247, 247, 247);
+    --bg-btn-tout:#20201f00;
+  --bg-btn-ajout:#20201f00;
+    --bg-btn-partage:#20201f00;
+--button_update_color:rgb(255, 255, 255);
+
+--color-btn-white:white;
+--border-btn-white:rgba(255, 255, 255, 0.233) solid 1px;
+   --border-btn-white-hover:rgb(255, 255, 255) solid 1px;
+--titre-dialog-white:#ffffff;
+
+  --resulta_bg:#5e5e5e17;
+  --resulta-shadow:0  10px 25px rgba(0, 0, 0, 0.219);      /* إطار أزرق رمادي فاتح */
+--border_resulta:rgba(211, 208, 208, 0.267) solid 1px;
+--color-select-dialog:#ffffff;
+    --text-secondary: #d1d1d1;
+        --bg-select-dialog:  rgba(26, 41, 65, 0.5);
+--bg-dialog-white:#1E201E;
+
+}
 
 .loading_all {
   min-height: 100vh;
@@ -46,16 +149,25 @@ body {
 .animate-bounceDelay3 {
   animation: bounce 1s infinite 0.4s;
 }
-
+.titre_code_doc{
+  color: var(--titre_code_doc);
+}
 .bloc_navbar {
-  background-color: rgba(30, 41, 59, 0.5);
+  background-color: var(--navbar-bg);
   /* bg-slate-800/50 */
   backdrop-filter: blur(4px);
   /* backdrop-blur-sm */
-  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+  border-bottom: 1px solid var(--navbar-border);
   /* border-b border-slate-700/50 */
 }
+.buttonx{
+  color: var(--color-x);
+}
 
+
+.bloc_matier_dialog_all{
+  background-color:var(--bg-color-bloc-mat);
+}
 .container {
   max-width: 72rem;
   /* max-w-6xl */
@@ -66,10 +178,7 @@ body {
   /* px-6 */
   padding-right: 1.5rem;
   padding-top: 1.5rem;
-  /* py-6 */
-  padding-bottom: 1.5rem;
 }
-
 .header {
   display: flex;
   /* flex */
@@ -107,7 +216,7 @@ body {
   /* text-3xl */
   font-weight: 700;
   /* font-bold */
-  color: white;
+  color: var(--text-primary);
   /* text-white */
 }
 
@@ -117,13 +226,13 @@ body {
   margin-left: 20px;
   font-weight: 700;
   /* font-bold */
-  color: white;
+  color: var(--text-primary);
   /* text-white */
 }
 
 
 .subtitle {
-  color: rgb(148 163 184);
+  color: var(--text-secondary);
   /* text-slate-400 */
   margin-top: 0.25rem;
   /* mt-1 */
@@ -141,6 +250,121 @@ body {
 }
 
 
+/* ------------------------------------------- */
+/* 1. تصميم الزر الأساسي (Pro Design) */
+/* ------------------------------------------- */
+.mode-toggle-btn {
+    /* التنسيق العام والقياسات */
+    padding: 10px 15px;
+    border-radius: 30px; /* شكل بيضاوي أنيق */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    
+    /* الحركة والتفاعل */
+    transition: all 0.3s ease-in-out;
+    display: flex; /* لضمان محاذاة النص والأيقونة */
+    align-items: center;
+    gap: 8px; /* مسافة بين النص والأيقونة */
+    user-select: none; /* منع تحديد النص */
+}
+
+/* ------------------------------------------- */
+/* 2. أنماط الوضع النهاري (Light Mode) */
+/* ------------------------------------------- */
+.mode-toggle-btn.light-mode {
+    /* ألوان الوضع النهاري: زر فاتح */
+    background: #F9FAFB;
+    color: #1F2937;
+    border: 1px solid #D1D5DB;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* ظل خفيف */
+}
+
+.mode-toggle-btn.light-mode:hover {
+    background: #FFFFFF;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* زيادة الظل عند التمرير */
+    transform: translateY(-1px);
+}
+
+/* ------------------------------------------- */
+/* 3. أنماط الوضع الليلي (Dark Mode) */
+/* ------------------------------------------- */
+.mode-toggle-btn.dark-mode {
+    /* ألوان الوضع الليلي: زر داكن */
+    background: #374151;
+    color: #F9FAFB;
+    border: 1px solid #4B5563;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mode-toggle-btn.dark-mode:hover {
+    background: #4B5563;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+/* ------------------------------------------- */
+/* 1. حاوية شريط التبديل */
+/* ------------------------------------------- */
+.toggle-switch-container {
+    display: flex;
+    justify-content: center;
+        margin: auto;
+margin-top: 0px;
+top: -10px;
+position: relative;
+
+z-index: 5000;
+    margin-bottom: 20px;
+    padding: 3px; /* مساحة داخلية حول الأزرار */
+    border-radius: 30px; /* حواف مستديرة للحاوية */
+    background-color: #F3F4F6; /* خلفية خفيفة */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* ظل داخلي خفيف */
+    width: fit-content; /* تتكيف مع عرض المحتوى */
+}
+
+/* ------------------------------------------- */
+/* 2. الأزرار الداخلية */
+/* ------------------------------------------- */
+.toggle-switch-btn {
+    padding: 8px 20px;
+    border: none;
+    position: relative;
+    border-radius: 25px;
+    font-weight: 600; /* خط سميك */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* حركة ناعمة */
+    min-width: 100px; /* عرض أدنى لتبدو أنيقة */
+}
+
+/* ------------------------------------------- */
+/* 3. أنماط الحالة النشطة (Active/Selected) */
+/* ------------------------------------------- */
+.toggle-switch-btn.is-public-active {
+    /* ألوان الحالة Public (الأزرق) */
+    background-color: #3B82F6; /* أزرق موحد وداكن */
+    color: white;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3); /* ظل خفيف على الزر النشط */
+}
+
+.toggle-switch-btn.is-private-active {
+    /* ألوان الحالة Private (الأحمر/الوردي الناعم) */
+    background-color: #EF4444; /* أحمر ناعم */
+    color: white;
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3); /* ظل خفيف على الزر النشط */
+}
+
+/* 4. أنماط الحالة غير النشطة (Inactive/Unselected) */
+.toggle-switch-btn.is-inactive {
+    background-color: transparent; /* خلفية شفافة */
+    color: #4B5563; /* لون رمادي للنص */
+}
+
+/* 5. تفاعل التمرير (Hover Effect) */
+.toggle-switch-btn.is-inactive:hover {
+    background-color: #E5E7EB; /* خلفية رمادية خفيفة جدا عند التمرير */
+    color: #1F2937;
+}
+
 /* container buttons */
 .btn-group {
   display: flex;
@@ -148,12 +372,13 @@ body {
   flex-wrap: wrap;
   /* flex-wrap */
   gap: 0.75rem;
+
   margin: auto;
   max-width: 1150px;
   margin-bottom: 20px;
 
-  margin-top: -25px;
-  border: red solid 0px;
+  margin-top: 0px;
+  border: red solid px;
   padding-left: 20px;
   padding-right: 20px;
 
@@ -167,48 +392,48 @@ body {
   /* items-center */
   gap: 0.5rem;
   /* gap-2 */
-  padding: 0.4rem 0.8rem;
+border:  var( --border-btn-white);
+  padding: 0.7rem 1.5rem;
   /* px-4 py-2 */
-  color: white;
+  color:  var(--color-btn-white);
   font-size: 14px;
   border-radius: 0.5rem;
   /* rounded-lg */
   transition: background-color 0.2s ease;
   /* transition-colors duration-200 */
   cursor: pointer;
-  border: none;
 }
+.btn:hover{
+    background-color: var(--bg-btn);
+    border: var( --border-btn-white-hover);
 
+}
 /* button colors */
 .btn-blue {
-  background-color: #2563eb;
+  background-color: var(--bg-btn-ajout);
+  
+}
+
+.btn-tout {
+  background-color:  var(--bg-btn-tout);
   /* bg-blue-600 */
 }
 
-.btn-blue:hover {
-  background-color: #1d4ed8;
-  /* hover:bg-blue-700 */
-}
+
 
 .btn-red {
-  background-color: #dc2626;
+  background-color:  var(--bg-btn-supprimer);
   /* bg-red-600 */
 }
 
-.btn-red:hover {
-  background-color: #b91c1c;
-  /* hover:bg-red-700 */
-}
+
 
 .btn-green {
-  background-color: #16a34a;
+  background-color: var(  --bg-btn-partage);
   /* bg-green-600 */
 }
 
-.btn-green:hover {
-  background-color: #15803d;
-  /* hover:bg-green-700 */
-}
+
 
 /* icons */
 .icon-sm {
@@ -247,14 +472,15 @@ body {
 
 }
 
+
 /* ==== Card Base ==== */
 .card {
   border-radius: 1rem;
   /* rounded-2xl */
   padding: 1.5rem;
   /* p-6 */
-  color: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  color:#212121;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.103);
   /* shadow-2xl */
   transform: scale(1);
   transition: all 0.3s ease;
@@ -267,16 +493,17 @@ body {
 
 /* Gradients */
 .purple-blue {
-  background: linear-gradient(to right, #9333ea, #2563eb);
+  /* background: linear-gradient(to right, #9333ea, #2563eb); */
+    background:var(--bg-card-Coefficients)
+
 }
 
 .emerald-teal {
-  background: linear-gradient(to right, #059669, #0d9488);
+background:var(--bg-card-Moyenne)
 }
 
 .orange-pink {
-  background: linear-gradient(to right, #ea580c, #db2777);
-}
+background:var(--bg-card-Nombre)}
 
 /* ==== Content ==== */
 .card-header {
@@ -380,13 +607,13 @@ body {
   /* py-3 + pr-4 */
   padding-left: 2.5rem;
   /* pl-10 */
-  background-color: rgba(30, 41, 59, 0.5);
+  background-color: var(--input-bg);
   /* bg-slate-800/50 */
-  border: 1px solid rgb(51, 65, 85);
+  border: 1px solid var(--input-border);
   /* border-slate-700 */
   border-radius: 0.75rem;
   /* rounded-xl */
-  color: white;
+  color: var(--input-text);
   /* text-white */
   font-size: 1rem;
   outline: none;
@@ -395,7 +622,7 @@ body {
 }
 
 .search-input::placeholder {
-  color: rgb(148 163 184);
+  color: var(--input-placeholder);
   /* placeholder-slate-400 */
 }
 
@@ -428,10 +655,45 @@ body {
   transition: background-color 0.2s ease;
   /* transition-colors */
 }
+.attantion-dialog{
+    margin-top: -10px;
+    font-size: 15px;
 
+}
 .search-btn:hover {
   background-color: #7e22ce;
   /* hover:bg-purple-700 */
+}
+
+/* الخلفية العامة للـ dialog */
+.custom-dialog_confirm {
+  background: var(--bg-dialog-white);
+  border-radius: 10px; /* لتنعيم الحواف */
+  overflow: hidden; /* لضمان عدم تجاوز الخلفية */
+  padding: 10px; /* padding موحد لكل المحتوى */
+
+}
+
+
+.header_dialog_moy{
+  border: red solid 0px;
+  padding: 40px;
+}
+.bloc_all_red_dialog{
+    border: red solid 0px;
+margin: 30px;
+margin-top: 0px;
+}
+
+/* إزالة الخلفية والـ blur من الأقسام الداخلية */
+.custom-dialog_confirm .p-dialog-header,
+.custom-dialog_confirm .p-dialog-content,
+.custom-dialog_confirm .p-dialog-footer {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  color:var(--titre-dialog-white);
+
+  border: none; /* إزالة أي حدود */
 }
 
 
@@ -440,65 +702,85 @@ body {
 
 
 
+.custom-confirm-dialog_supprimmer {
+ background: var(--bg-dialog-white);
+;
+  border-radius: 10px; /* لتنعيم الحواف */
+  overflow: hidden; /* لضمان عدم تجاوز الخلفية */
+  padding: 10px; /* padding موحد لكل المحتوى */
+
+}
+
+
+
+/* يخلي الـ box (header + content + footer) كامل نفس اللون */
+.custom-confirm-dialog_supprimmer .p-dialog-header,
+.custom-confirm-dialog_supprimmer .p-dialog-content,
+.custom-confirm-dialog_supprimmer .p-dialog-footer {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  color:var(--titre-dialog-white);
+
+  border: none; /* إزالة أي حدود */
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-.bloc_matiers {
+.bloc_matiers,.bloc_matiers_bd,.bloc_matiers_dilaog {
   border: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   /* auto-responsive */
   gap: 20px;
   border: red solid 0px;
-  max-width: 1150px;
   padding-left: 20px;
   padding-right: 20px;
+
   margin: auto;
 }
+.bloc_matiers_bd{
+    max-width: 100%;
+    padding: 0;
 
+
+}
+.bloc_matiers{
+        max-width: 1150px;
+
+}
 .card_matier {
-  border: #374151 solid 1px;
+  border:  var(--card-border);
   padding: 20px;
-
-  background-color: #1f29376b;
+  background-color: var(--card-bg);
   border-radius: 8px;
   width: 100%;
+  color: var(--color-btn-white);
   transition: 0.2s;
+  box-shadow: var(--card-shadow) ;
 }
 
 .card_matier:hover {
-
-  background-color: #2c3f5754;
-
+  background-color: var(--card-hover-bg);
 }
 .card_matier_dialog{
 
-  border: #374151 solid 1px;
+  border:  var(--card-border);
   padding: 20px;
+  box-shadow: var(--card-shadow) ;
 
-  background-color: #1f29376b;
+  background-color: var(--card-bg);
   border-radius: 8px;
-  width: 100%;
+
   transition: 0.2s;
 }
 .nav_matier {
-  border: #949f94 solid 0px;
+  border: #949f94 solid px;
   display: flex;
 }
 
 .titre_mat {
-  color: white;
+  color: var(--text-primary);
   font-size: 17px;
   font-weight: 500;
 }
@@ -530,8 +812,8 @@ body {
 
 
 label {
-  color: #d1d5db;
-  font-size: 14px;
+  color: var(--text-secondary);
+  font-size: 16px;
   font-weight: 500;
   border: red solid 0px;
   white-space: nowrap;
@@ -545,17 +827,20 @@ label {
 }
 
 .label {
-  margin-bottom: -20px;
+  margin-bottom: -15px;
+  
+  margin-left: 3px;
+
 }
 
 input {
   width: 100%;
   border: #4b5563 solid 1px;
-  padding: 7px;
+  padding: 12px;
   border-radius: 5px;
   font-size: 15px;
-  color: #ebeced;
-  background-color: #374151;
+  color: var(--input-text);
+  background-color: var(--input-bg);
 }
 
 input:focus {
@@ -571,16 +856,16 @@ input::placeholder {
 }
 
 .bloc_moyenne_mat {
-  border: red solid 0px;
+  border:  var(--border_resulta);
   margin-top: 15px;
   padding: 15px;
-  background-color: #374151;
+  background-color: var(--resulta_bg);
   border-radius: 5px;
   display: flex;
 }
 
 .moy_mat {
-  color: #ebeced;
+  color: var(--input-text);
   font-size: 14px;
   position: relative;
   top: 5px;
@@ -606,60 +891,63 @@ input::placeholder {
 
 /* Whole dialog box */
 .custom-dialog .p-dialog {
-  background-color: #0000007c;
+  background-color: #c405057c;
   /* main background */
   color: white;
   /* text color */
 }
 
-/* Header */
-.custom-dialog .p-dialog-header {
-  backdrop-filter: blur(40px);
-  /* دعم Safari */
-  background: #4f1b7c5d;
-  /* خلفية شبه شفافة */
-  color: white;
- padding-left: 15px;
- padding-right: 15px;
+/* الخلفية العامة للـ dialog */
+.custom-dialog {
+  background:var(--bg-dialog-white);
+  border-radius: 10px; /* لتنعيم الحواف */
+  overflow: hidden; /* لضمان عدم تجاوز الخلفية */
+  padding: 15px; /* padding موحد لكل المحتوى */
 }
-
-/* Content */
-.custom-dialog .p-dialog-content {
-
-  backdrop-filter: blur(40px);
-  /* دعم Safari */
-  background: #4f1b7c5d;
-    padding-top: 15px;
- padding-left: 15px;
- padding-right: 15px;
-  /* خلفية شبه شفافة */
+.all{
+  width: 100%;
 }
-
-
-/* Footer */
+/* إزالة الخلفية والـ blur من الأقسام الداخلية */
+.custom-dialog .p-dialog-header,
+.custom-dialog .p-dialog-content,
 .custom-dialog .p-dialog-footer {
-  backdrop-filter: blur(40px);
-  /* دعم Safari */
-  background: #4f1b7c5d;
-  /* خلفية شبه شفافة */
-  color: white;
-  border-top: none;
-  padding-top: 15px;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  color: var(--titre-dialog-white);;
 
+  padding: 0; /* الآن padding موحد في العنصر الأساسي */
+  border: none; /* إزالة أي حدود */
+  
 }
+
 
 .select_dialog {
   border: #4b5563 solid 1px;
   width: 100%;
-  padding: 7px;
+  padding: 14px;
   border-radius: 5px;
   font-size: 15px;
-  color: #ebeced;
+  color:var(--color-select-dialog);
   margin-top: 5px;
-  background-color: #374151;
+  background-color: var(--bg-select-dialog);
 
 }
+.select_dialog:optional{
+  color:var(--color-select-dialog);
+  background-color: var(--bg-select-dialog);
+}
 
+.herder_dialog{
+
+  padding: 15px;
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+.main_dialog{
+  border: red solid 0px;
+  padding: 20px;
+  padding-top: 0px;
+}
 .input_rech {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
@@ -723,7 +1011,7 @@ input::placeholder {
     top: 32px;
     margin-left: auto;
     font-weight: 500;
-    color: white;
+    color: var(--text-primary);
   }
 
   .total_coef1 {
@@ -757,7 +1045,7 @@ input::placeholder {
   }
 
   .btn {
-    padding: 0.4rem 0.6rem;
+    padding: 0.6rem 1.3rem;
     /* px-4 py-2 */
     font-size: 13px;
   }
@@ -801,11 +1089,11 @@ input::placeholder {
   padding: 20px;
   text-align: center;
   color: #8a8f99;
-
+  color: var(--text-secondary);
 }
 
 .acune_titre {
-  color: #8f959e;
+  color: var(--text-secondary);
   margin-top: 20px;
   font-size: 19px;
   margin-bottom: 15px;
@@ -820,8 +1108,40 @@ input::placeholder {
   display: none;
 }
 
+.button_generer_code{
+  padding: 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  background: var(--bg-button-generer-code);
+  color: var(--color-btn-generer);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.button-ajouter-matier{
+  padding: 10px;
+  width: 100%;
+  margin-left: 5px;
+  border-radius: 5px;
+  background: var(--bg-button-generer-code);
+  color: var(--color-btn-generer);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.button-annuler-matier{
+  padding: 10px;
+  width: 100%;
+  margin-left: 5px;
+  border-radius: 5px;
+  background:rgba(241, 39, 39, 0.767);
+  color: var(--color-btn-generer);
+  cursor: pointer;
+  transition: 0.2s;
 
 
+}
+.button_generer_code:hover{
+transform: scale(1.05);
+}
 .button_remove_id {
   border: red solid 0px;
   width: 20px;
@@ -831,7 +1151,17 @@ input::placeholder {
   margin-bottom: 5px;
   margin-left: auto;
 }
+.button_apdate{
+    color:var(--button_update_color);
+    border: none;
+    background-color: transparent;
+  transition: 0.1s;
+}
 
+.button_apdate:hover {
+  color: rgb(43, 152, 255);
+  font-weight: 900;
+}
 .button_rem {
   color: rgb(248, 152, 152);
   transition: 0.1s;
@@ -839,10 +1169,10 @@ input::placeholder {
 
 .button_rem:hover {
   color: rgb(245, 6, 6);
-}
-.titre11{
+    font-weight: 900;
 
 }
+
 .titre22{
 display: none;
 }
@@ -871,7 +1201,7 @@ display: none;
   .subtitle {
     color: rgb(148 163 184);
     /* text-slate-400 */
-    margin-top: 0.25rem;
+    margin-top: 0.25rem; 
     /* mt-1 */
     font-size: 15px;
   }
@@ -893,15 +1223,20 @@ display: none;
   display: none;
   
 }
+.bloc_matiers_bd{
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+}
 .card_matier_dialog{
 
   padding: 15px;
+  width: 100%;
 
 }
+
 .custom-dialog .p-dialog-content {
 
   /* دعم Safari */
-  background: #4f1b7c5d;
     padding-top: 15px;
     
     padding-top: 20px;
@@ -909,6 +1244,11 @@ display: none;
   /* خلفية شبه شفافة */
 }
 
+  .btn {
+    padding: 0.6rem 0.8rem;
+    /* px-4 py-2 */
+    font-size: 12px;
+  }
 }
 
 @media (max-width:424px) {
@@ -920,7 +1260,7 @@ display: none;
   .subtitle {
     color: rgb(148 163 184);
     /* text-slate-400 */
-    margin-top: 0.25rem;
+    margin-top: 0.25rem; 
     /* mt-1 */
     font-size: 12px;
   }
@@ -972,6 +1312,11 @@ display: none;
 font-size: 12px;  
 }
 
+  .btn {
+    padding: 0.6rem 0.5rem;
+    /* px-4 py-2 */
+    font-size: 12px;
+  }
 }
 
 
@@ -1014,7 +1359,7 @@ font-size: 12px;
   position: relative;
   top: 10px;
   font-weight: 900;
-  color: white;
+  color: var(--text-primary);
   border-radius: 7px;
   padding: 10px;
   background-color: #06b6d4;
@@ -1054,6 +1399,7 @@ font-size: 12px;
   /* يمنع النص من الانتقال لسطر جديد */
   overflow: hidden;
   /* يخفي النص الزائد */
+
   text-overflow: ellipsis;
   /* يعرض ... عند قص النص */
   max-width: 100%;
@@ -1163,12 +1509,11 @@ input[type=number] {
 .mg_dialog {
   font-size: 19px;
   margin-right: 20px;
-  color: white;
+  color: var(--text-primary);
 }
 
 .moy_dialog {
-  font-size: 24px;
-  font-weight: 700;
+color: var(--text-primary);
 }
 
 
@@ -1178,3 +1523,79 @@ input[type=number] {
   pointer-events: none; /* منع أي تفاعل */
   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.bloc_nav_link{
+  border: red solid 0px;
+display: block;
+  max-width: 360px;  
+
+
+margin: auto;
+margin-bottom: 40px;
+
+}
+.footer_body{
+    margin-left: 20px;
+  margin-right: 20px;
+
+}
+.button_ajout_dialog_ajout_mat{
+width: 100%;
+}
+
+
+
+
+
+
+.p-toast-top-right {
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.p-toast-top-right .p-toast {
+  width: 100% !important;
+  border-radius: 0 !important;
+}
+/* flouter الخلفية فقط عندما يظهر الـDialog */
+.custom-blur {
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3); /* اختيارية: تغمق الخلفية */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
